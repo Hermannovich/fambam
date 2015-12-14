@@ -14,6 +14,7 @@ import javax.microedition.khronos.opengles.GL10;
 public class MyGLRenderer implements GLSurfaceView.Renderer {
 
     private Triangle mTriangle;
+    private Triangle mTriangle2;
     private Square mSquare;
     private final float[] mMVPMatrix = new float[16];
     private final float[] mProjectionMatrix = new float[16];
@@ -54,6 +55,7 @@ public class MyGLRenderer implements GLSurfaceView.Renderer {
 
         // Draw shape
         mTriangle.draw(scratch);
+        mTriangle2.draw(scratch);
         mSquare.draw(mMVPMatrix);
     }
 
@@ -62,6 +64,7 @@ public class MyGLRenderer implements GLSurfaceView.Renderer {
         // Set the background frame color
         GLES20.glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
         mTriangle = new Triangle();
+        mTriangle2 = new Triangle(new float[] { 0.5f, 0.5f, 0.0f});
         mSquare = new Square();
     }
 

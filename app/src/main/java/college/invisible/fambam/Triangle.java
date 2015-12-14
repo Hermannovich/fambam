@@ -49,11 +49,22 @@ public class Triangle {
     private final int mProgram;
 
     public Triangle() {
+        this(new float[] {0.0f, 0.0f, 0.0f});
+    }
+
+    public Triangle(float[] offset) {
         // initialize vertex byte buffer for shape coordinates
         ByteBuffer bb = ByteBuffer.allocateDirect(
                 // (number of coordinate values * 4 bytes per float)
                 // this seems very unportable
                 triangleCoords.length * 4);
+
+        // Add offset
+        for (int i = 0; i < triangleCoords.length; i += 3) {
+            triangleCoords[i] += offset[0];
+            triangleCoords[i+1] += offset[1];
+            triangleCoords[i+2] += offset[2];
+        }
 
         // use the device hardware's native byte order
         bb.order(ByteOrder.nativeOrder());
