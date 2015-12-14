@@ -8,7 +8,7 @@ import java.nio.ShortBuffer;
 /**
  * Created by ppham on 12/13/15.
  */
-public class Square {
+public class Square extends Triangle {
 
     private FloatBuffer vertexBuffer;
     private ShortBuffer drawListBuffer;
