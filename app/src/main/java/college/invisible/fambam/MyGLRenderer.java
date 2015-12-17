@@ -21,6 +21,17 @@ public class MyGLRenderer implements GLSurfaceView.Renderer {
     private final float[] mViewMatrix = new float[16];
     private float[] mRotationMatrix = new float[16];
 
+    private float mZ;
+
+    public float getZ() {
+        return mZ;
+    }
+
+    public void setZ(float z) {
+        mZ = z;
+        System.out.println("z:" + this.mZ);
+    }
+
     public volatile float mAngle;
 
     public float getAngle() {
@@ -31,6 +42,10 @@ public class MyGLRenderer implements GLSurfaceView.Renderer {
         mAngle = angle;
     }
 
+    public MyGLRenderer() {
+        this.mZ = 0.0f;
+    }
+
     public void onDrawFrame(GL10 unused) {
         float[] scratch = new float[16];
 
@@ -38,7 +53,7 @@ public class MyGLRenderer implements GLSurfaceView.Renderer {
         GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT);
 
         // Set the camera position (View matrix)
-        Matrix.setLookAtM(mViewMatrix, 0, 0, 0, -3, 0f, 0f, 0f, 0f, 1.0f, 0.0f);
+        Matrix.setLookAtM(mViewMatrix, 0, 0, 0, -3, 0f, 0f, mZ, 0f, 1.0f, 0.0f);
 
         // Calculate the projection and view transformation
         Matrix.multiplyMM(mMVPMatrix, 0, mProjectionMatrix, 0, mViewMatrix, 0);
