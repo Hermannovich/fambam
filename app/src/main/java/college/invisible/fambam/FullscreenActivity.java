@@ -10,6 +10,10 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.squareup.picasso.Picasso;
+
+import java.io.File;
+
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
  * status bar and navigation/system bar) with user interaction.
@@ -96,24 +100,32 @@ public class FullscreenActivity extends AppCompatActivity {
         setContentView(R.layout.activity_fullscreen);
 
         mVisible = true;
-        mControlsView = findViewById(R.id.fullscreen_content_controls);
-        mContentView = findViewById(R.id.fullscreen_content);
+        //mControlsView = findViewById(R.id.fullscreen_content_controls);
+        //mContentView = findViewById(R.id.fullscreen_content);
 
         ImageView iv = (ImageView) findViewById(R.id.imageView);
-        iv.setImageDrawable(getResources().getDrawable());
+        Picasso.with(FullscreenActivity.this).load(new File("phamp_evergreen.jpg")).into(iv);
+        iv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                System.out.println("Clicked image!");
+                toggle();
+            }
+        });
 
         // Set up the user interaction to manually show or hide the system UI.
+        /*
         mContentView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 toggle();
             }
         });
-
+        */
         // Upon interacting with UI controls, delay any scheduled hide()
         // operations to prevent the jarring behavior of controls going away
         // while interacting with the UI.
-        findViewById(R.id.dummy_button).setOnTouchListener(mDelayHideTouchListener);
+        //findViewById(R.id.dummy_button).setOnTouchListener(mDelayHideTouchListener);
 
     }
 
