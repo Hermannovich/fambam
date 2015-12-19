@@ -27,7 +27,6 @@ public class MyView extends View {
     public MyView(Context context) {
         super(context);
         init(null, 0);
-        mPaint = new Paint();
     }
 
     public MyView(Context context, AttributeSet attrs) {
@@ -59,10 +58,15 @@ public class MyView extends View {
         if (a.hasValue(R.styleable.MyView_exampleDrawable)) {
             mExampleDrawable = a.getDrawable(
                     R.styleable.MyView_exampleDrawable);
+            // What callback method actually gets called?
             mExampleDrawable.setCallback(this);
         }
 
         a.recycle();
+
+        // Set up a Paint object for drawing other shapes
+        mPaint = new Paint();
+        mPaint.setColor(Color.MAGENTA);
 
         // Set up a default TextPaint object
         mTextPaint = new TextPaint();
@@ -104,6 +108,10 @@ public class MyView extends View {
 
         mPaint.setColor(Color.MAGENTA);
 
+
+        canvas.drawCircle(100.0, 100);
+
+        // Here we programmatically check if example drawable is statically set
         // Draw the example drawable on top of the text.
         if (mExampleDrawable != null) {
             mExampleDrawable.setBounds(paddingLeft, paddingTop,
